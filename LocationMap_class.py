@@ -21,20 +21,23 @@ class LocationMap:
     def fitness(self, solution):
         ultimo = self.locations[0]
         distancia_segmento = 0
-        
+        # max = 0
+
         total = 0
 
-        for i in range(len(solution.routes)):
+        for i in range(len(solution.routes)+1):
             if i == len(solution.routes) or solution.routes[i] >= len(self.locations):
                 distancia_segmento += self.distance(self.locations[0], ultimo)
+                # if distancia_segmento > max: max = distancia_segmento
                 total += distancia_segmento**2
                 distancia_segmento = 0
-                last = self.locations[0]
+                ultimo = self.locations[0]
             else:
                 ponto_atual = self.locations[solution.routes[i]]
                 distancia_segmento += self.distance(ponto_atual, ultimo)
                 ultimo = ponto_atual
         # print(total)
+        # return max
         return total
     
     

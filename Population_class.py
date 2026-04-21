@@ -28,8 +28,8 @@ class Population:
             else:
                 self.solutions.append(Solution(parent1))
         self.sortSolutions()
-        print(self.solutions[0].routes, self.map.fitness(self.solutions[0]))
-        plotar(self.solutions[0].routes,self.map.locations)
+        print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/150)**0.5)
+        # plotar(self.solutions[0].routes,self.map.locations)
 
     def simulate(self, count):
         for i in range(count):

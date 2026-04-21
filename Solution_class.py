@@ -17,7 +17,7 @@ class Solution:
                 
                 
             else:
-                self.routes = parent1.routes
+                self.routes = parent1.routes.copy()
                 self.mutate()
         else:
             self.routes = np.full(len(parent1.routes), -1)
@@ -36,7 +36,7 @@ class Solution:
             parent2_index = final_segmento
             #OX
             for i in range(len(self.routes)):
-                if i >= inicio_segmento and i < final_segmento: continue
+                if i >= inicio_segmento and i < final_segmento+1: continue
                 while self.routes[i] == -1:
                     local = parent2.routes[parent2_index]
 

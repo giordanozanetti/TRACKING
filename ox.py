@@ -32,8 +32,8 @@ def ox ():
             if parent2_index >= len(routes) - 1: parent2_index = 0
             else: parent2_index += 1
 
-    print(inicio_segmento, final_segmento)
-    print(routes)
+    # print(inicio_segmento, final_segmento)
+    # print(routes)
 
 i=0
 while i < 50:
@@ -41,4 +41,4 @@ while i < 50:
     i+=1
 end = time.time()
 
-print(end-start)
+# print(end-start)
