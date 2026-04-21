@@ -22,13 +22,13 @@ class Population:
         parents_validos = len(self.solutions)
         while(len(self.solutions) < self.size):
             parent1 = self.solutions[random.randint(0, parents_validos-1)]
-            if SEX_CHANCE < random.random():
+            if SEX_CHANCE > random.random():
                 parent2 = self.solutions[random.randint(0, parents_validos-1)]
                 self.solutions.append(Solution(parent1,parent2))
             else:
                 self.solutions.append(Solution(parent1))
         self.sortSolutions()
-        print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/150)**0.5)
+        print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/3)**0.5)
         # plotar(self.solutions[0].routes,self.map.locations)
 
     def simulate(self, count):

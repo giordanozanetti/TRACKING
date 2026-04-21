@@ -1,4 +1,4 @@
-from config import TAMANHO_FROTA, LOCATION_COUNT, MAJOR_MUTATION_RATE, MINOR_MUTATION_RATE
+from config import TAMANHO_FROTA, LOCATION_COUNT, MAJOR_MUTATION_RATE, MINOR_MUTATION_RATE, EXCLUSIVE_CROSS, EXCLUSIVE_MAJOR
 import numpy as np # pyright: ignore[reportMissingImports]
 import random
 
@@ -45,12 +45,16 @@ class Solution:
                     #SE CHEGOU NO FINAL VOLTA PRO COMEÇO, ASSIM ELE PERCORRE DIRETO
                     if parent2_index >= len(self.routes) - 1: parent2_index = 0
                     else: parent2_index += 1
+
+            if not EXCLUSIVE_CROSS: self.mutate()
+                
             
 
 
     def mutate(self):
         if MAJOR_MUTATION_RATE > random.random():
             self.inverseMutation()
+            if (EXCLUSIVE_MAJOR): return;
 
         if MINOR_MUTATION_RATE > random.random():
             if random.randint(0, 1):
