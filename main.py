@@ -1,9 +1,13 @@
 from Population_class import Population
 from config import POPULATION_SIZE, GENERATIONS
-from plot import plotar
+import plot 
 
 
 pop = Population(POPULATION_SIZE)
 pop.simulate(GENERATIONS)
+plot.plt.ioff()
 
-plotar(pop.solutions[0].routes,pop.map.locations)
+# plot.plotar(pop.solutions[0].routes,pop.map.locations,pop.medias,pop.melhores,pop.piores,False)
+
+plot.plt.draw()
+plot.plt.show()

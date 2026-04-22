@@ -1,4 +1,4 @@
-from config import ELITISM, SEX_CHANCE, LOCATION_COUNT
+from config import ELITISM, SEX_CHANCE, LOCATION_COUNT, GENERATIONS, TAMANHO_FROTA
 from plot import plotar
 from LocationMap_class import LocationMap
 from Solution_class import Solution
@@ -12,7 +12,11 @@ class Population:
         self.map = LocationMap(LOCATION_COUNT)
         self.mean = 0.0
         self.min = 0.0
+        self.max = 0.0
         self.genartion = 0
+        self.piores = np.array([])      
+        self.medias = np.array([]) 
+        self.melhores = np.array([])    
         
 
     def nextGeneration(self):
@@ -28,13 +32,15 @@ class Population:
             else:
                 self.solutions.append(Solution(parent1))
         self.sortSolutions()
-        print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/3)**0.5)
-        # plotar(self.solutions[0].routes,self.map.locations)
+        # print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/3)**0.5)
+        # print(self.medias,self.melhores,self.piores)
+        
+        plotar(self.solutions[0].routes,self.map.locations,self.medias,self.melhores,self.piores,self.genartion)
 
     def simulate(self, count):
         for i in range(count):
             self.nextGeneration()
-        self.computeStats()
+            self.computeStats()
 
     def sortSolutions(self):
         evals = {s:self.map.fitness(s) for s in self.solutions}
@@ -43,11 +49,17 @@ class Population:
     def computeStats(self):
         total = 0
         self.min = float('inf')
+        self.max = float('-inf')
 
         for s in self.solutions:
             eval = self.map.fitness(s)
             self.min = min(self.min, eval)
+            self.max = max(self.max, eval)
             total += eval
 
         self.mean = total / self.size
-        
+        print(self.mean, self.max, self.min)
+        self.medias = np.concatenate((self.medias, [(self.mean/TAMANHO_FROTA)**0.5]))
+        self.piores = np.concatenate((self.piores, [(self.max/TAMANHO_FROTA)**0.5]))
+        self.melhores = np.concatenate((self.melhores, [(self.min/TAMANHO_FROTA)**0.5]))
+

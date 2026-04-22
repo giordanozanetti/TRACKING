@@ -54,7 +54,7 @@ class Solution:
     def mutate(self):
         if MAJOR_MUTATION_RATE > random.random():
             self.inverseMutation()
-            if (EXCLUSIVE_MAJOR): return;
+            if (EXCLUSIVE_MAJOR): return
 
         if MINOR_MUTATION_RATE > random.random():
             if random.randint(0, 1):
