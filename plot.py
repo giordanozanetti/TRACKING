@@ -1,10 +1,7 @@
-import matplotlib 
+import matplotlib # type: ignore
 matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt # type: ignore
 import numpy as np #pyright: ignore[reportMissingImports]
-import matplotlib 
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt 
 
 #FAZENDO OS ESQUEMA DO MATPLOT INTERATIVO
 
@@ -41,7 +38,7 @@ def plotar(percurso,pontos,medias,melhores,piores):
     axGrafo.plot(array_dos_x, array_dos_y)
 
     axGrafo.scatter(pontos[0][0], pontos[0][1], color="red")
-
+    
     plt.show()
     plt.pause(0.01)
 

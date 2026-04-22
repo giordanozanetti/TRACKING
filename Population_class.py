@@ -17,6 +17,7 @@ class Population:
         self.piores = np.array([])      
         self.medias = np.array([]) 
         self.melhores = np.array([])    
+        self.computeStats()
         
 
     def nextGeneration(self):
@@ -34,9 +35,10 @@ class Population:
         self.sortSolutions()
         # print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/3)**0.5)
         # print(self.medias,self.melhores,self.piores)
-        if GRAFICO_INTERATIVO or self.genartion == GENERATIONS:
+        if (GRAFICO_INTERATIVO and self.genartion%20 == 0) or self.genartion == GENERATIONS:
             plotar(self.solutions[0].routes,self.map.locations,self.medias,self.melhores,self.piores)
 
+        
     def simulate(self, count):
         for i in range(count):
             self.nextGeneration()
@@ -58,8 +60,8 @@ class Population:
             total += eval
 
         self.mean = total / self.size
-        print(self.mean, self.max, self.min)
         self.medias = np.concatenate((self.medias, [(self.mean/TAMANHO_FROTA)**0.5]))
         self.piores = np.concatenate((self.piores, [(self.max/TAMANHO_FROTA)**0.5]))
         self.melhores = np.concatenate((self.melhores, [(self.min/TAMANHO_FROTA)**0.5]))
+        print(f"Melhor: {self.melhores[-1]:5.10f} Pior: {self.piores[-1]:5.10f} Media: {self.medias[-1]:5.10f}")
 
