@@ -1,4 +1,4 @@
-from config import ELITISM, SEX_CHANCE, LOCATION_COUNT, GENERATIONS, TAMANHO_FROTA
+from config import ELITISM, SEX_CHANCE, LOCATION_COUNT, GENERATIONS, TAMANHO_FROTA, GRAFICO_INTERATIVO
 from plot import plotar
 from LocationMap_class import LocationMap
 from Solution_class import Solution
@@ -34,8 +34,8 @@ class Population:
         self.sortSolutions()
         # print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/3)**0.5)
         # print(self.medias,self.melhores,self.piores)
-        
-        plotar(self.solutions[0].routes,self.map.locations,self.medias,self.melhores,self.piores,self.genartion)
+        if GRAFICO_INTERATIVO or self.genartion == GENERATIONS:
+            plotar(self.solutions[0].routes,self.map.locations,self.medias,self.melhores,self.piores)
 
     def simulate(self, count):
         for i in range(count):
