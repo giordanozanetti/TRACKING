@@ -1,4 +1,4 @@
-from config import ELITISM, SEX_CHANCE, LOCATION_COUNT, GENERATIONS, TAMANHO_FROTA, GRAFICO_INTERATIVO
+from config import ELITISM, SEX_CHANCE, LOCATION_COUNT, GENERATIONS, TAMANHO_FROTA, GRAFICO_INTERATIVO, GRAPHIC_RATE
 from plot import plotar
 from LocationMap_class import LocationMap
 from Solution_class import Solution
@@ -35,7 +35,7 @@ class Population:
         self.sortSolutions()
         # print(self.solutions[0].routes, (self.map.fitness(self.solutions[0])/3)**0.5)
         # print(self.medias,self.melhores,self.piores)
-        if (GRAFICO_INTERATIVO and self.genartion%20 == 0) or self.genartion == GENERATIONS:
+        if (GRAFICO_INTERATIVO and self.genartion%GRAPHIC_RATE == 0) or self.genartion == GENERATIONS:
             plotar(self.solutions[0].routes,self.map.locations,self.medias,self.melhores,self.piores)
 
         
@@ -63,5 +63,4 @@ class Population:
         self.medias = np.concatenate((self.medias, [(self.mean/TAMANHO_FROTA)**0.5]))
         self.piores = np.concatenate((self.piores, [(self.max/TAMANHO_FROTA)**0.5]))
         self.melhores = np.concatenate((self.melhores, [(self.min/TAMANHO_FROTA)**0.5]))
-        print(f"Melhor: {self.melhores[-1]:5.10f} Pior: {self.piores[-1]:5.10f} Media: {self.medias[-1]:5.10f}")
-
+        print(f"Geração: {self.genartion} Melhor: {self.melhores[-1]:5.10f} Pior: {self.piores[-1]:5.10f} Media: {self.medias[-1]:5.10f}")
