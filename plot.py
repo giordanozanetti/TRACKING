@@ -3,7 +3,7 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt # type: ignore
 import numpy as np #pyright: ignore[reportMissingImports]
 from config import TAMANHO_FROTA
-import random
+import random    
 
 #FAZENDO OS ESQUEMA DO MATPLOT INTERATIVO
 
@@ -13,6 +13,7 @@ axPior.set_title('Pior individuo')
 #NAO TEM O DO GRAFO PQ TIVE QUE FAZER ELE A CADA LOOP
 axMedia.set_title('Media dos individuos')
 axMelhor.set_title('Melhor individuo')  
+cores = np.array(["red", "green", "blue", "yellow", "brown"])
 
 def plotar(percurso,pontos,medias,melhores,piores):
     axGrafo.clear()
@@ -35,8 +36,7 @@ def plotar(percurso,pontos,medias,melhores,piores):
     for i in range(len(separadores)-1):
         array_dos_x = pontos[percurso_final[separadores[i]:separadores[i+1]+1], 0]
         array_dos_y = pontos[percurso_final[separadores[i]:separadores[i+1]+1], 1]
-        cor = (random.random(), random.random(), random.random())
-        axGrafo.plot(array_dos_x, array_dos_y, lw=1, c=cor)
+        axGrafo.plot(array_dos_x, array_dos_y, lw=1, c=cores[i])
     
     # array_dos_x = pontos[percurso_final[i0:i1+1], 0]
     # array_dos_y = pontos[percurso_final[i0:i1+1], 1]
